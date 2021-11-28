@@ -11,7 +11,7 @@ namespace RecordBook.DataBase.DataModels
         public int ID { get; set; }
         public string Name { get; set; }
         public string University { get; set; }
-        private string Group { get; set; }
+        public string Group { get; set; }
         public string Speciality { get; set; }
         public int Course { get; set; }
     }

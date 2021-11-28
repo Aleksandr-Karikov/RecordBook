@@ -10,8 +10,8 @@ using RecordBook.DataBase;
 namespace RecordBook.Migrations
 {
     [DbContext(typeof(RecordBkContext))]
-    [Migration("20211125121745_changeColumns")]
-    partial class changeColumns
+    [Migration("20211128124228_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,11 +63,13 @@ namespace RecordBook.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int>("Course")
                         .HasColumnType("int");
+
+                    b.Property<string>("Group")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

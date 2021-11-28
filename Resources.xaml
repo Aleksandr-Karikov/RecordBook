@@ -2,14 +2,18 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <LinearGradientBrush x:Key="buttonBrush">
         <GradientStopCollection>
-            <GradientStop Color="White" Offset="0" />
-            <GradientStop Color="Blue" Offset="1" />
+            <GradientStop Color="MediumVioletRed" Offset="0" />
+            <GradientStop Color="DeepPink" Offset="1" />
         </GradientStopCollection>
     </LinearGradientBrush>
-    <DataTemplate   x:Key="ItemTemplate">
-        <StackPanel>
-            <TextBlock Width="100" Height="25" Text="{Binding Path=Name}"></TextBlock>
-            <TextBlock Width="100" Height="25" Text="{Binding Path=Number}"></TextBlock>
-        </StackPanel>
-    </DataTemplate>
+    <Style TargetType="Button" x:Key="buttomTest">
+        <Setter Property="OverridesDefaultStyle"
+          Value="true" />
+        <Setter Property="MinHeight"
+          Value="40" />
+        <Setter Property="MinWidth"
+          Value="75" />
+       
+    </Style>
+    
 </ResourceDictionary>

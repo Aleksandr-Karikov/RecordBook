@@ -1,0 +1,112 @@
+﻿<Window x:Class="RecordBook.Views.AddMark"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RecordBook.Views"
+        mc:Ignorable="d"
+        Title="AddMark" Height="450" Width="800">
+    <Grid Background="MediumSlateBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" CornerRadius="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="93*"/>
+                        <ColumnDefinition Width="16*"/>
+                        <ColumnDefinition Width="30*"/>
+                        <ColumnDefinition Width="39*"/>
+                        <ColumnDefinition Width="89*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+
+                <GroupBox Grid.Row="2" Header="Зачетные книжки">
+                    <ListBox
+                        Margin="10"
+                        ItemsSource="{Binding  RecordBooksChoosen}"
+                        SelectedItem="{Binding SelectedRB}"
+                        Height="180"
+                        Background="Cyan">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Foreground="Black" Text="{Binding Number}"/>
+                                    <TextBlock Grid.Column="1" Foreground="Black" Text="{Binding Group}"/>
+                                    <TextBlock Grid.Column="2" Foreground="Black" Text="{Binding FIO}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </GroupBox>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="65.333"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Column="0" Grid.Row="0">
+                <TextBlock Text="Семестр" />
+            </Border>
+            <Border Grid.Column="0" Grid.Row="1" >
+                <TextBlock Text="Название предмета" 
+                           />
+            </Border>
+            <Border Grid.Column="0" Grid.Row="2" >
+                <TextBlock Text="Количество часов" />
+            </Border>
+            <Border Grid.Column="0" Grid.Row="3" >
+                <TextBlock Text="Оценка" />
+            </Border>
+            <Border Grid.Column="0" Grid.Row="4" >
+                <TextBlock Text="Дата выставления" />
+            </Border>
+            <Border Grid.Column="0" Grid.Row="5" >
+                <TextBlock Text="Тип сдачи" />
+            </Border>
+            <Border Grid.Column="0" Grid.Row="6">
+                <TextBlock Text="ФИО преподавателя" />
+            </Border>
+
+            <ComboBox Grid.Column="1"  Height="30" Grid.Row="0" Margin="10"  ItemsSource="{Binding Terms}" SelectedItem="{Binding CurrentTerm}"/>
+            <ComboBox Grid.Column="1" Height="30" Grid.Row="3" Margin="10"  ItemsSource="{Binding Marks}" SelectedItem="{Binding Mark}"/>
+            <ComboBox Grid.Column="1"  Height="30" Grid.Row="5" Margin="10"  ItemsSource="{Binding Types}" SelectedItem="{Binding Type}"/>
+
+            <TextBox Grid.Column="1"  Height="30" Grid.Row="1"  Text="{Binding NameSubject, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <TextBox Grid.Column="1" Height="30" Grid.Row="2"  Text="{Binding CountHours , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <TextBox Grid.Column="1"  Height="30" Grid.Row="4"  Text="{Binding Date , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <TextBox Grid.Column="1" Height="30" Grid.Row="6"  Text="{Binding Teacher , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+            <Button Grid.Row="7" Grid.Column="1" Content="Внести оценку"  Command="{Binding AddMarkCommand}"/>
+        </Grid>
+    </Grid>
+</Window>

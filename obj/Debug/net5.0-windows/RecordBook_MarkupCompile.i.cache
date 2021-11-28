@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\Александр\source\repos\RecordBook\App.xaml
-22061804217
+5-1820728220
 
-18-1043977708
+23-157990253
 214-1951057838
-Resources.xaml;Views\MainWindow.xaml;
+Resources.xaml;Views\AddMark.xaml;Views\CreateRecordBookWindow.xaml;Views\EditWindow.xaml;Views\MainWindow.xaml;
 
 False
 

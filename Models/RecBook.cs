@@ -19,15 +19,18 @@ namespace RecordBook.Models
     {
 
         private RecordBkContext context;
-        public RecBook(int number, string fio, int course, string group, string nameDeputyHead,RecordBkContext context)
+        public RecBook(int number, string fio, int course, string group, string university, string speciality, RecordBkContext context)
         {
             this.context = context;
             FIO = fio;
             Number = number;
             Course = course;
             Group = group;
-            NameDeputyHead = nameDeputyHead;
+            University = university;
+            Speciality = speciality;
         }
+        public string University { get; set; }
+        public string Speciality { get; set; }
         public string Name { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -90,8 +93,8 @@ namespace RecordBook.Models
                 Records.Add(new Record(number, term, subject, hours, mark.mark, date, type,teacher));
             }
         }
-
-        public void AddMark(string term, string nameSubject, int countHours, string mark, string _date, string _type)
+        //CurrentTerm, NameSubject, Convert.ToInt32(CountHours), Mark, Date, Type, Teacher
+        public void AddMark(string term, string nameSubject, int countHours, string mark, string _date, string _type,string teacher)
         {
             try
             {
@@ -100,13 +103,13 @@ namespace RecordBook.Models
                     date = DateTime.Parse(_date);
 
                 if (String.IsNullOrEmpty(_date) && String.IsNullOrEmpty(mark))
-                    context.Marks.Add(new Mark() { RecordBkID = Number, Hours = countHours, Term = term, Subject = nameSubject, Type = _type});
+                    context.Marks.Add(new Mark() { RecordBkID = Number, Hours = countHours, Term = term, Subject = nameSubject, Type = _type, Teacher= teacher });
                 else if (String.IsNullOrEmpty(_date))
-                    context.Marks.Add(new Mark() { RecordBkID = Number, Hours = countHours, Term = term, Subject = nameSubject, Type = _type, mark = mark });
+                    context.Marks.Add(new Mark() { RecordBkID = Number, Hours = countHours, Term = term, Subject = nameSubject, Type = _type, mark = mark, Teacher = teacher });
                 else if (String.IsNullOrEmpty(mark))
-                    context.Marks.Add(new Mark() { RecordBkID = Number, Hours = countHours, Term = term, Subject = nameSubject, Type = _type,Date=date });
+                    context.Marks.Add(new Mark() { RecordBkID = Number, Hours = countHours, Term = term, Subject = nameSubject, Type = _type,Date=date, Teacher = teacher });
                 else
-                context.Marks.Add(new Mark() { RecordBkID = Number, Hours = countHours, Term = term, Subject = nameSubject, Type = _type, mark = mark, Date = date });
+                context.Marks.Add(new Mark() { RecordBkID = Number, Hours = countHours, Term = term, Subject = nameSubject, Type = _type, mark = mark, Date = date, Teacher = teacher });
                 context.SaveChanges();
                 UpdateRecords();
                 MessageBox.Show("Оценка занесена в зачетную книжку!");

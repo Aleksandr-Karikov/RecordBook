@@ -1,5 +1,5 @@
 ﻿using RecordBook.DataBase;
-using RecordBook.DataBase.DataModels;
+using RecordBook.Models;
 using RecordBook.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,21 +13,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RecordBook
+namespace RecordBook.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для EditWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EditWindow : Window
     {
-
-        public MainWindow(RecordBkContext t)
+        public EditWindow(RecordBkContext context,ICollection<RecBook> recordBooks)
         {
             InitializeComponent();
-            DataContext = new RecBookViewModel(t);
+            DataContext = new EditViewModel(context,recordBooks);
         }
     }
 }

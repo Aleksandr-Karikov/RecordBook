@@ -5,24 +5,105 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecordBook"
         xmlns:m="clr-namespace:RecordBook.Models"
+        xmlns:vm="clr-namespace:RecordBook.ViewModels"
         mc:Ignorable="d"
         Title="Record Book" Height="450" Width="800"
          WindowStartupLocation="CenterScreen"
          >
+    <!--<Window.DataContext>
+        <vm:RecBookViewModel></vm:RecBookViewModel>
+    </Window.DataContext>-->
     <Grid Background="DarkViolet">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <ListBox  ItemTemplate="{StaticResource ItemTemplate}"
-            Background="Aqua"
-             Margin="5"
-            Height="300"
-            Width="320"
-            >
-        </ListBox>
+        <StackPanel>
+            <Button Grid.Row="0" MinHeight="30"  MaxHeight="30" Content="Поставить оценку"   Background="Aqua" Command="{Binding AddMarkCommand}"/>
+            <Button Grid.Row="1" MinHeight="30"  MaxHeight="30" Content="Редактирование" Background="Aqua" Command="{Binding EditCommand}"/>
+            <Button Grid.Row="2" MinHeight="30"  MaxHeight="30" Content="Красный диплом" Background="Aqua" Command="{Binding CalculateProbabilityCommand}"/>
+        </StackPanel>
+
+        <!--<Grid Grid.Row="1" Margin="25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"
+                                 Text="{Binding ChoosenRecordBook}"
+                                 AcceptsReturn="False">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter"
+                                            Command="{Binding FilterRecordBookCommand}"
+                                            CommandParameter="{Binding Text, RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}"></KeyBinding>
+                </TextBox.InputBindings>
+            </TextBox>
+            <Button Grid.Column="1"  Command="{Binding FilterRecordBookCommand}">
+                <Button.Content>Filter</Button.Content>
+            </Button>
+        </Grid>-->
+
+        <GroupBox Grid.Column="1" Grid.RowSpan="2" Header="Зачетные книжки">
+            <ListBox Background="BlueViolet" BorderBrush="#6C8CD5"
+                            ItemsSource="{Binding  RecordBooksChoosen}"
+                            SelectedItem="{Binding CurrentRecordBook}"
+                            Height="130" FontFamily="Futura PT Book Italic"
+                     Margin="10">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="*"/>
+      
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Foreground="White" Grid.Column="0" Text="{Binding Number}"/>
+                            <TextBlock Foreground="White" Grid.Column="1" Text="{Binding Group}"/>
+                            <TextBlock Foreground="White" Grid.Column="2" Text="{Binding FIO}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+       
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Foreground="White" Content="Выберите семестр" HorizontalAlignment="Center" Grid.RowSpan="2" VerticalAlignment="Top"/>
+            <ComboBox Grid.Row="1" Margin="15,0,15,15"
+                              FontSize="13" HorizontalContentAlignment="Center"
+                              ItemsSource="{Binding Terms, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                              SelectedItem="{Binding CurrentTerm}" 
+                              >
+            </ComboBox>
+        </Grid>
+        <StackPanel Grid.Row="3" Margin="15">
+            <Button  Width="100" Height="25" Content="Создать зачетку"  Command="{Binding CreateRecordBookCommand}"/>
+            <Button Grid.Row="3" Width="150" Height="20" Command="{Binding ToNextCourseCommand}" Content="Перевести на след.курс"/>
+        </StackPanel>
+        <DataGrid Grid.Row="1" 
+                          IsReadOnly="True"
+                          ColumnWidth="*"
+                          ColumnHeaderHeight="30"
+                          Margin="10"
+                          FontSize="13"
+                          FontFamily="Futura PT Book Italic"
+                          HorizontalContentAlignment="Center"
+                          ItemsSource="{Binding RBTable[0].DefaultView, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+        </DataGrid>
+
+
+
     </Grid>
 </Window>

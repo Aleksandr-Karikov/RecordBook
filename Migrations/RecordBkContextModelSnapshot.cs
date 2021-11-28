@@ -67,6 +67,9 @@ namespace RecordBook.Migrations
                     b.Property<int>("Course")
                         .HasColumnType("int");
 
+                    b.Property<string>("Group")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 

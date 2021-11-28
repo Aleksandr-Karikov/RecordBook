@@ -1,5 +1,4 @@
 ﻿using RecordBook.DataBase;
-using RecordBook.DataBase.DataModels;
 using RecordBook.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,21 +12,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RecordBook
+namespace RecordBook.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для CreateRecordBookWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CreateRecordBookWindow : Window
     {
-
-        public MainWindow(RecordBkContext t)
+        public CreateRecordBookWindow(RecordBkContext context)
         {
             InitializeComponent();
-            DataContext = new RecBookViewModel(t);
+            DataContext = new CreateRecordBookViewModel(context);
         }
     }
 }

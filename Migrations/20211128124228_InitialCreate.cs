@@ -11,11 +11,13 @@ namespace RecordBook.Migrations
                 name: "Recordbooks",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ID = table.Column<int>(type: "int", nullable: false),
+        
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     University = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Speciality = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Group = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Speciality = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Course = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,13 +30,14 @@ namespace RecordBook.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    mark = table.Column<byte>(type: "tinyint", nullable: false),
+                    mark = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Hours = table.Column<int>(type: "int", nullable: false),
                     Subject = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Semester = table.Column<byte>(type: "tinyint", nullable: false),
+                    Term = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RecordBkID = table.Column<int>(type: "int", nullable: false)
+                    RecordBkID = table.Column<int>(type: "int", nullable: false),
+                    Teacher = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

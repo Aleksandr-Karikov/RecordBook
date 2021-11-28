@@ -60,3 +60,9 @@ C:\Users\Александр\source\repos\RecordBook\obj\Debug\net5.0-windows\Vie
 C:\Users\Александр\source\repos\RecordBook\obj\Debug\net5.0-windows\RecordBook.csproj.AssemblyReference.cache
 C:\Users\Александр\source\repos\RecordBook\obj\Debug\net5.0-windows\Resources.baml
 C:\Users\Александр\source\repos\RecordBook\obj\Debug\net5.0-windows\App.baml
+C:\Users\Александр\source\repos\RecordBook\obj\Debug\net5.0-windows\Views\CreateRecordBookWindow.g.cs
+C:\Users\Александр\source\repos\RecordBook\obj\Debug\net5.0-windows\Views\CreateRecordBookWindow.baml
+C:\Users\Александр\source\repos\RecordBook\obj\Debug\net5.0-windows\Views\AddMark.g.cs
+C:\Users\Александр\source\repos\RecordBook\obj\Debug\net5.0-windows\Views\AddMark.baml
+C:\Users\Александр\source\repos\RecordBook\obj\Debug\net5.0-windows\Views\EditWindow.g.cs
+C:\Users\Александр\source\repos\RecordBook\obj\Debug\net5.0-windows\Views\EditWindow.baml

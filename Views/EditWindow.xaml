@@ -1,0 +1,88 @@
+﻿<Window x:Class="RecordBook.Views.EditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RecordBook.Views"
+        mc:Ignorable="d"
+        Title="EditWindow" Height="450" Width="800">
+    <Grid Background="MediumSlateBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+
+
+        <Border Grid.Column="0" CornerRadius="10" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+
+                <GroupBox Grid.Row="2" Foreground="White" Header="Зачетные книжки" Margin="10">
+                    <ListBox
+                        Margin="10"
+                        ItemsSource="{Binding  RecordBooksChoosen}"
+                        SelectedItem="{Binding SelectedRB}"
+                        Height="180"
+                        Background="Cyan">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Foreground="Black" Text="{Binding Number}"/>
+                                    <TextBlock Grid.Column="1" Foreground="Black" Text="{Binding Group}"/>
+                                    <TextBlock Grid.Column="2" Foreground="Black" Text="{Binding FIO}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </GroupBox>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Column="0" Grid.Row="0">
+                <TextBlock Text="Семестр" />
+            </Border>
+            <Border Grid.Column="0" Grid.Row="1" >
+                <TextBlock Text="Название предмета" />
+            </Border>
+            <Border Grid.Column="0" Grid.Row="2" >
+                <TextBlock Text="Оценка"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="3">
+                <TextBlock Text="Дата выставления" />
+            </Border>
+
+            <ComboBox Height="30" Grid.Column="1" Margin="10"   Grid.Row="0" ItemsSource="{Binding Terms}" SelectedItem="{Binding CurrentTerm}"/>
+            <ComboBox Height="30" Grid.Column="1" Margin="10"  Grid.Row="1" ItemsSource="{Binding Subjects}" SelectedItem="{Binding Subject}"/>
+            <ComboBox  Height="30" Grid.Column="1" Margin="10"   Grid.Row="2" ItemsSource="{Binding Marks}" SelectedItem="{Binding Mark}"/>
+
+            <TextBox Height="30" Grid.Column="1" Grid.Row="3"   Text="{Binding Date}"/>
+
+            <Button Grid.Row="4" Grid.Column="1" Content="Внести оценку"  Command="{Binding EditCommand}"/>
+        </Grid>
+    </Grid>
+</Window>
