@@ -22,10 +22,10 @@ namespace RecordBook.Views
     /// </summary>
     public partial class AddMark : Window
     {
-        public AddMark(RecordBkContext context,ICollection<RecBook> recordBooks)
+        public AddMark(RecordBkContext context,RecBook recordBook)
         {
             InitializeComponent();
-            DataContext = new AddMarkViewModel(context,recordBooks);
+            DataContext = new AddMarkViewModel(context, recordBook);
         }
     }
 }

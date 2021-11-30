@@ -9,47 +9,7 @@
     <Grid Background="MediumSlateBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-
-
-
-        <Border Grid.Column="0" CornerRadius="10" >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-
-
-                <GroupBox Grid.Row="2" Foreground="White" Header="Зачетные книжки" Margin="10">
-                    <ListBox
-                        Margin="10"
-                        ItemsSource="{Binding  RecordBooksChoosen}"
-                        SelectedItem="{Binding SelectedRB}"
-                        Height="180"
-                        Background="Cyan">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="60"/>
-                                        <ColumnDefinition Width="60"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Foreground="Black" Text="{Binding Number}"/>
-                                    <TextBlock Grid.Column="1" Foreground="Black" Text="{Binding Group}"/>
-                                    <TextBlock Grid.Column="2" Foreground="Black" Text="{Binding FIO}"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </GroupBox>
-            </Grid>
-        </Border>
-
         <Grid Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -62,25 +22,24 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                <TextBlock Text="Семестр" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <ComboBox Height="30"  VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Column="1" Margin="10" Width="100"  Grid.Row="0" ItemsSource="{Binding Terms}" SelectedItem="{Binding CurrentTerm}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                <TextBlock Text="Название предмета" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <ComboBox Height="30"  VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Column="1" Margin="10" Width="100"  Grid.Row="0" ItemsSource="{Binding Subjects}" SelectedItem="{Binding Subject}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+                <TextBlock Text="Оценка" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <ComboBox Height="30"  VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Column="1" Margin="10" Width="100"  Grid.Row="0"  ItemsSource="{Binding Marks}" SelectedItem="{Binding Mark}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
+                <TextBlock Text="Дата выставления" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <TextBox Height="30" Width="200"  VerticalAlignment="Center" HorizontalAlignment="Center"  Text="{Binding Date}"/>
+            </StackPanel>
 
-            <Border Grid.Column="0" Grid.Row="0">
-                <TextBlock Text="Семестр" />
-            </Border>
-            <Border Grid.Column="0" Grid.Row="1" >
-                <TextBlock Text="Название предмета" />
-            </Border>
-            <Border Grid.Column="0" Grid.Row="2" >
-                <TextBlock Text="Оценка"/>
-            </Border>
-            <Border Grid.Column="0" Grid.Row="3">
-                <TextBlock Text="Дата выставления" />
-            </Border>
-
-            <ComboBox Height="30" Grid.Column="1" Margin="10"   Grid.Row="0" ItemsSource="{Binding Terms}" SelectedItem="{Binding CurrentTerm}"/>
-            <ComboBox Height="30" Grid.Column="1" Margin="10"  Grid.Row="1" ItemsSource="{Binding Subjects}" SelectedItem="{Binding Subject}"/>
-            <ComboBox  Height="30" Grid.Column="1" Margin="10"   Grid.Row="2" ItemsSource="{Binding Marks}" SelectedItem="{Binding Mark}"/>
-
-            <TextBox Height="30" Grid.Column="1" Grid.Row="3"   Text="{Binding Date}"/>
+            <Label Grid.Row="4"  Height="30" Width="100" Grid.Column="0"  Content="{Binding Info, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></Label>
 
             <Button Grid.Row="4" Grid.Column="1" Content="Внести оценку"  Command="{Binding EditCommand}"/>
         </Grid>

@@ -38,7 +38,17 @@ namespace RecordBook.ViewModels
                 OnPropertyChanged(nameof(SelectedRB));
             }
         }
-
+        private string _info;
+        public string Info
+        {
+            get => _info;
+            set
+            {
+                _info = SelectedRB.FIO + " " + SelectedRB.Number.ToString();
+                OnPropertyChanged(nameof(Info));
+            }
+   
+        }
         private string _name;
         private string _countHours;
         private string _date;
@@ -84,13 +94,10 @@ namespace RecordBook.ViewModels
             }
         }
 
-        public AddMarkViewModel(RecordBkContext context, ICollection<RecBook> recordBooks) : base(context)
+        public AddMarkViewModel(RecordBkContext context,RecBook recordBooks) : base(context)
         {
-            foreach (var item in recordBooks)
-            {
-                RecordBooks.Add(item);
-                RecordBooksChoosen.Add(item);
-            }
+            SelectedRB = recordBooks;
+            Info = recordBooks.Name;
         }
         private void SetTerms()
         {
@@ -105,6 +112,11 @@ namespace RecordBook.ViewModels
         {
             try
             {
+                if (Mark == null || NameSubject == null || CurrentTerm == null)
+                {
+                    MessageBox.Show("Введите данные");
+                    return;
+                }
                 SelectedRB.AddMark(CurrentTerm, NameSubject, Convert.ToInt32(CountHours), Mark, Date, Type, Teacher);
 
                 var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);

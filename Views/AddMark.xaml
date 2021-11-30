@@ -7,14 +7,12 @@
         mc:Ignorable="d"
         Title="AddMark" Height="450" Width="800">
     <Grid Background="MediumSlateBlue">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
+
 
         <Border Grid.Column="0" CornerRadius="10">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -32,7 +30,7 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
 
-                <GroupBox Grid.Row="2" Header="Зачетные книжки">
+                <!--<GroupBox Grid.Row="2" Header="Зачетные книжки">
                     <ListBox
                         Margin="10"
                         ItemsSource="{Binding  RecordBooksChoosen}"
@@ -54,14 +52,14 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                </GroupBox>
+                </GroupBox>-->
             </Grid>
         </Border>
 
         <Grid Grid.Column="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -97,15 +95,15 @@
                 <TextBlock Text="ФИО преподавателя" />
             </Border>
 
-            <ComboBox Grid.Column="1"  Height="30" Grid.Row="0" Margin="10"  ItemsSource="{Binding Terms}" SelectedItem="{Binding CurrentTerm}"/>
-            <ComboBox Grid.Column="1" Height="30" Grid.Row="3" Margin="10"  ItemsSource="{Binding Marks}" SelectedItem="{Binding Mark}"/>
-            <ComboBox Grid.Column="1"  Height="30" Grid.Row="5" Margin="10"  ItemsSource="{Binding Types}" SelectedItem="{Binding Type}"/>
+            <ComboBox Grid.Column="0"  Height="30" Width="100" Grid.Row="0" Margin="10"  ItemsSource="{Binding Terms}" SelectedItem="{Binding CurrentTerm}"/>
+            <ComboBox Grid.Column="0" Height="30" Grid.Row="3" Width="100" Margin="10"  ItemsSource="{Binding Marks}" SelectedItem="{Binding Mark}"/>
+            <ComboBox Grid.Column="0"  Height="30" Grid.Row="5" Width="100" Margin="10"  ItemsSource="{Binding Types}" SelectedItem="{Binding Type}"/>
 
-            <TextBox Grid.Column="1"  Height="30" Grid.Row="1"  Text="{Binding NameSubject, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-            <TextBox Grid.Column="1" Height="30" Grid.Row="2"  Text="{Binding CountHours , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-            <TextBox Grid.Column="1"  Height="30" Grid.Row="4"  Text="{Binding Date , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-            <TextBox Grid.Column="1" Height="30" Grid.Row="6"  Text="{Binding Teacher , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-
+            <TextBox Grid.Column="0"  Height="30" Grid.Row="1" Width="100"  Text="{Binding NameSubject, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <TextBox Grid.Column="0" Height="30" Grid.Row="2"  Width="100" Text="{Binding CountHours , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <TextBox Grid.Column="0"  Height="30" Grid.Row="4"  Width="100" Text="{Binding Date , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <TextBox Grid.Column="0" Height="30" Grid.Row="6"   Width="100" Text="{Binding Teacher , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <Label Grid.Row="7"  Height="30" Width="100" Grid.Column="0"  Content="{Binding Info, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></Label>
             <Button Grid.Row="7" Grid.Column="1" Content="Внести оценку"  Command="{Binding AddMarkCommand}"/>
         </Grid>
     </Grid>

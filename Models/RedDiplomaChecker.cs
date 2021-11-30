@@ -12,7 +12,6 @@ namespace RecordBook.Models
     {
 
         private static RecBook _recordBook;
-        private static RecordBkContext context;
         private static int _fiveProbability;
         private static int _fourProbability;
         private static Dictionary<int, int> Marks = new Dictionary<int, int>

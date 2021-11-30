@@ -66,3 +66,4 @@ C:\Users\Александр\source\repos\RecordBook\obj\Debug\net5.0-windows\Vie
 C:\Users\Александр\source\repos\RecordBook\obj\Debug\net5.0-windows\Views\AddMark.baml
 C:\Users\Александр\source\repos\RecordBook\obj\Debug\net5.0-windows\Views\EditWindow.g.cs
 C:\Users\Александр\source\repos\RecordBook\obj\Debug\net5.0-windows\Views\EditWindow.baml
+C:\Users\Александр\source\repos\RecordBook\obj\Debug\net5.0-windows\RecordBook.csproj.CopyComplete

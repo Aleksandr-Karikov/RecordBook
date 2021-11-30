@@ -30,7 +30,17 @@ namespace RecordBook.ViewModels
                 SetSubjects();
             }
         }
+        private string _info;
+        public string Info
+        {
+            get => _info;
+            set
+            {
+                _info = SelectedRB.FIO + " " + SelectedRB.Number.ToString();
+                OnPropertyChanged(nameof(Info));
+            }
 
+        }
         private string _mark;
         public string Mark
         {
@@ -68,13 +78,10 @@ namespace RecordBook.ViewModels
 
         public RelayCommand EditCommand { get => _editCommand ?? (_editCommand = new RelayCommand(obj => Edit())); }
         
-        public EditViewModel(RecordBkContext context, ICollection<RecBook> recordBooks):base(context)
+        public EditViewModel(RecordBkContext context,RecBook rec):base(context)
         {
-            foreach (var item in recordBooks)
-            {
-                RecordBooks.Add(item);
-                RecordBooksChoosen.Add(item);
-            }
+            SelectedRB = rec;
+            Info = rec.Name;
         }
 
         private void SetSubjects()

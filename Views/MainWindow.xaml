@@ -53,7 +53,7 @@
         <GroupBox Grid.Column="1" Grid.RowSpan="2" Header="Зачетные книжки">
             <ListBox Background="BlueViolet" BorderBrush="#6C8CD5"
                             ItemsSource="{Binding  RecordBooksChoosen}"
-                            SelectedItem="{Binding CurrentRecordBook}"
+                            SelectedItem="{Binding CurrentRecordBook,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                             Height="130" FontFamily="Futura PT Book Italic"
                      Margin="10">
                 <ListBox.ItemTemplate>
@@ -63,7 +63,7 @@
                                 <ColumnDefinition Width="60"/>
                                 <ColumnDefinition Width="60"/>
                                 <ColumnDefinition Width="*"/>
-      
+
                             </Grid.ColumnDefinitions>
                             <TextBlock Foreground="White" Grid.Column="0" Text="{Binding Number}"/>
                             <TextBlock Foreground="White" Grid.Column="1" Text="{Binding Group}"/>
@@ -73,15 +73,20 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </GroupBox>
-       
+        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label> ВВедите номер зачтеки или ФИО для поиска</Label>
+            <TextBox  Background="Aqua" Width="100" Height="20"  Text="{Binding Finder,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+            <Button Background="Aqua" Height="20" Command="{Binding FindCommand}"> Find</Button>
+        </StackPanel>
 
+        <Label Grid.Row="2" Grid.Column="1" Content="{Binding Info,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></Label>
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Foreground="White" Content="Выберите семестр" HorizontalAlignment="Center" Grid.RowSpan="2" VerticalAlignment="Top"/>
-            <ComboBox Grid.Row="1" Margin="15,0,15,15"
+            <ComboBox Background="Aqua" Grid.Row="1" Margin="15,0,15,15"
                               FontSize="13" HorizontalContentAlignment="Center"
                               ItemsSource="{Binding Terms, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                               SelectedItem="{Binding CurrentTerm}" 
@@ -89,10 +94,11 @@
             </ComboBox>
         </Grid>
         <StackPanel Grid.Row="3" Margin="15">
-            <Button  Width="100" Height="25" Content="Создать зачетку"  Command="{Binding CreateRecordBookCommand}"/>
-            <Button Grid.Row="3" Width="150" Height="20" Command="{Binding ToNextCourseCommand}" Content="Перевести на след.курс"/>
+            <Button Background="Aqua" Width="100" Height="25" Content="Создать зачетку"  Command="{Binding CreateRecordBookCommand}"/>
+            <!--<Button Grid.Row="3" Width="150" Height="20" Command="{Binding ToNextCourseCommand}" Content="Перевести на след.курс"/>-->
         </StackPanel>
         <DataGrid Grid.Row="1" 
+                  Background="Aqua"
                           IsReadOnly="True"
                           ColumnWidth="*"
                           ColumnHeaderHeight="30"

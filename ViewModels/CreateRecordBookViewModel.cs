@@ -114,7 +114,7 @@ namespace RecordBook.ViewModels
                 var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
                 window.Close();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 MessageBox.Show("Невозможно создать зачетку! Возможно, данные не введены, или введены не корректно.");
             }

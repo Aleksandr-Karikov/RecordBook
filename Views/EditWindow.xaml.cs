@@ -22,10 +22,10 @@ namespace RecordBook.Views
     /// </summary>
     public partial class EditWindow : Window
     {
-        public EditWindow(RecordBkContext context,ICollection<RecBook> recordBooks)
+        public EditWindow(RecordBkContext context,RecBook recordBook)
         {
             InitializeComponent();
-            DataContext = new EditViewModel(context,recordBooks);
+            DataContext = new EditViewModel(context, recordBook);
         }
     }
 }

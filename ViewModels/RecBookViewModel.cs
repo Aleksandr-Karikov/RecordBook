@@ -9,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RecordBook.ViewModels
 {
@@ -17,7 +18,9 @@ namespace RecordBook.ViewModels
 
         public RecBookViewModel(RecordBkContext context):base(context)
         {
-            UpdateRecordBooks(); }
+            UpdateRecordBooks();
+            
+        }
         // private AgreeWindow _agreeWindow;
         private RecBook _current;
         private string _currentTerm = "1 семестр";
@@ -26,12 +29,7 @@ namespace RecordBook.ViewModels
         private RelayCommand _addMarkCommand;
         private RelayCommand _editCommand;
         private RelayCommand _calculateProbability;
-        private RelayCommand _openNextTermCommand;
-        private RelayCommand _openPrevTermCommand;
-    //    private RelayCommand _toNextCourseCommand;
-
-        private RelayCommand _agreeCommand;
-        private RelayCommand _notAgreeCommand;
+        private RelayCommand _findCommand;
         public ObservableCollection<DataTable> RBTable { get; set; } =
            new ObservableCollection<DataTable> { };
         public RecBook CurrentRecordBook
@@ -42,12 +40,15 @@ namespace RecordBook.ViewModels
                 _current = value;
 
                 //CurrentTerm = "1 семестр";
-
-                CurrentRecordBook.UpdateRecords();
-                UpdateDataGrid();
-                SetTerms();
-
-                OnPropertyChanged(nameof(CurrentRecordBook));
+                if (CurrentRecordBook!=null)
+                {
+                    CurrentRecordBook.UpdateRecords();
+                    UpdateDataGrid();
+                    SetTerms();
+                    Info = "";
+                    OnPropertyChanged(nameof(CurrentRecordBook));
+                }
+                
             }
         }
         public string CurrentTerm
@@ -73,7 +74,7 @@ namespace RecordBook.ViewModels
             {
                 SqlConnection _sqlConnection = new SqlConnection("Server=(local)\\sqlexpress;Database=RecordBook;Trusted_Connection=True;");
                 DataTable table = new DataTable();
-
+                if (CurrentRecordBook == null) return;
                 string command = $"select [Subject], [Hours], [mark], [Date], [Type], [Teacher] from Marks where [RecordBkID] = N'{CurrentRecordBook.Number}' and [Term] = N'{CurrentTerm}'";
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(command, _sqlConnection);
                 dataAdapter.Fill(table);
@@ -81,7 +82,7 @@ namespace RecordBook.ViewModels
                 RBTable.Clear();
                 RBTable.Add(table);
             }
-            catch (Exception e ) { }
+            catch (Exception e ) { MessageBox.Show(e.Message); }
         }
 
         private void SetTerms()
@@ -102,10 +103,24 @@ namespace RecordBook.ViewModels
 
             UpdateRecordBooks();
         }
-
+        private string _info;
+        public string Info
+        {
+            get => _info;
+            set {
+                _info = CurrentRecordBook.Number + " " + CurrentRecordBook.FIO;
+                OnPropertyChanged(nameof(Info));
+            }
+            
+        }
         private void AddMark()
         {
-            AddMark w = new AddMark(context,RecordBooks);
+            if (CurrentRecordBook==null)
+            {
+                MessageBox.Show("Выберите зачетку");
+                return;
+            }
+            AddMark w = new AddMark(context, CurrentRecordBook);
             w.ShowDialog();
 
             if (CurrentRecordBook != null)
@@ -114,21 +129,64 @@ namespace RecordBook.ViewModels
 
         private void EditMark()
         {
-            EditWindow w = new EditWindow(context,RecordBooks);
+            if (CurrentRecordBook == null)
+            {
+                MessageBox.Show("Выберите зачетку");
+                return;
+            }
+            EditWindow w = new EditWindow(context, CurrentRecordBook);
             w.ShowDialog();
 
             if (CurrentRecordBook != null)
                 UpdateDataGrid();
         }
+        private string finder;
+        public string Finder
+        {
+            get => finder;
+            set
+            {
+                finder = value;
+                OnPropertyChanged(nameof(Finder));
+            }
+        }
+        private void FindRecordBook()
+        {
+            if (string.IsNullOrEmpty(Finder))
+            {
+                MessageBox.Show("Введите данные");
+                return;
+            }
+            RecBook rez;
+            var book = context.Recordbooks.FirstOrDefault(x => x.Name == Finder);
+            if (book != null) rez =  new RecBook(book.ID, book.Name, book.Course, book.Group, book.University, book.Speciality, context); ;
+            if (int.TryParse(Finder, out var number))
+            {
+                book = context.Recordbooks.FirstOrDefault(x => x.ID == number);
+            }
+            if (book != null)
+                rez = new RecBook(book.ID, book.Name, book.Course, book.Group, book.University, book.Speciality, context);
+            else
+            {
+                MessageBox.Show("Не найдено");
+                return;
+            }
+
+            if (rez!=null)
+            {
+                MessageBox.Show($"Зачетка найдена {rez.FIO} {rez.Number}");
+
+                CurrentRecordBook = rez;
+                UpdateRecordBooks();
+                
+                
+            }
+            
+        }
         public RelayCommand CreateRecordBookCommand { get => _createRecordBookCommand ?? (_createRecordBookCommand = new RelayCommand(obj => CreateRecordBook())); }
         public RelayCommand AddMarkCommand { get => _addMarkCommand ?? (_addMarkCommand = new RelayCommand(obj => AddMark())); }
         public RelayCommand EditCommand { get => _editCommand ?? (_editCommand = new RelayCommand(obj => EditMark())); }
         public RelayCommand CalculateProbabilityCommand { get => _calculateProbability ?? (_calculateProbability = new RelayCommand(obj => RedDiplomaCalculator.CalculateProbabilityRedDiploma(CurrentRecordBook))); }
-        //public RelayCommand OpenNextTermCommand { get => _openNextTermCommand ?? (_openNextTermCommand = new RelayCommand(obj => OpenNextTerm())); }
-        //public RelayCommand OpenPrevTermCommand { get => _openPrevTermCommand ?? (_openPrevTermCommand = new RelayCommand(obj => OpenPrevTerm())); }
-        //public RelayCommand ToNextCourseCommand { get => _toNextCourseCommand ?? (_toNextCourseCommand = new RelayCommand(obj => ToNextCourse())); }
-
-        //public RelayCommand AgreeCommand { get => _agreeCommand ?? (_agreeCommand = new RelayCommand(obj => Agree())); }
-        //public RelayCommand NotAgreeCommand { get => _notAgreeCommand ?? (_notAgreeCommand = new RelayCommand(obj => NotAgree())); }
+        public RelayCommand FindCommand { get => _findCommand ?? (_findCommand = new RelayCommand(obj => FindRecordBook())) ; }
     }
 }

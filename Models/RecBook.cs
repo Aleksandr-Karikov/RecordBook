@@ -93,7 +93,7 @@ namespace RecordBook.Models
                 Records.Add(new Record(number, term, subject, hours, mark.mark, date, type,teacher));
             }
         }
-        //CurrentTerm, NameSubject, Convert.ToInt32(CountHours), Mark, Date, Type, Teacher
+       
         public void AddMark(string term, string nameSubject, int countHours, string mark, string _date, string _type,string teacher)
         {
             try
@@ -101,7 +101,7 @@ namespace RecordBook.Models
                 DateTime date = default;
                 if (_date != null && _date != "")
                     date = DateTime.Parse(_date);
-
+                
                 if (String.IsNullOrEmpty(_date) && String.IsNullOrEmpty(mark))
                     context.Marks.Add(new Mark() { RecordBkID = Number, Hours = countHours, Term = term, Subject = nameSubject, Type = _type, Teacher= teacher });
                 else if (String.IsNullOrEmpty(_date))
@@ -137,23 +137,7 @@ namespace RecordBook.Models
             context.SaveChanges();
             MessageBox.Show($"Исправление даты");
         }
-        public void ToNextCourse()
-        {
-            if (Course < 5)
-            {
-                Course++;
-
-                var rec = context.Recordbooks.FirstOrDefault(x => x.ID == Number);
-                rec.Course = Course;
-                context.SaveChanges();
-                UpdateRecords();
-                MessageBox.Show($"Студент {FIO} переведен на {Course} курс!");
-            }
-            else
-            {
-                MessageBox.Show("Студент учится на выпускном курсе!");
-            }
-        }
+        
 
     }
 }
